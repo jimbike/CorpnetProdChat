@@ -1,136 +1,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
  
-<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
- 
-<script type='text/javascript'>
-   var orgURL = 'https://youthentrepreneurs.my.salesforce.com';
-   var chatURL = 'https://youthentrepreneurs.secure.force.com/chat';
-   var liveAgentURL = 'https://d.la4-c2-ia5.salesforceliveagent.com';
-   var orgId = '00D5A000001733p';
- 
-   var initESW = function(gslbBaseURL) {
-       embedded_svc.settings.displayHelpButton = true; //Or false
-       embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
-       embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-       embedded_svc.settings.entryFeature = 'LiveAgent';
-       embedded_svc.settings.extraPrechatFormDetails = [{"label":"Text", "transcriptFields": ["Customer_URL__c"]}, {"label":"Text", "transcriptFields": ["Pre_Chat_Name__c"]}, {"label":"Text", "transcriptFields": ["Pre_Chat_Email__c"]}];
-       embedded_svc.settings.extraPrechatInfo = [{
-       "entityFieldMaps": [{
-           "doCreate": true,
-           "doFind": false,
-           "fieldName": "LastName",
-           "isExactMatch": false,
-           "label": "Last Name"
-       }, {
-           "doCreate": true,
-           "doFind": false,
-           "fieldName": "FirstName",
-           "isExactMatch": false,
-           "label": "First Name"
-       }, {
-           "doCreate": true,
-           "doFind": true,
-           "fieldName": "Email",
-           "isExactMatch": true,
-           "label": "Email"
-       }],
-       "entityName": "Contact",
-       "saveToTranscript": "Contact",
-       "showOnCreate": true
-       }];
- 
-       embedded_svc.init(
-           orgURL,
-           chatURL,
-           gslbBaseURL,
-           orgId,
-           'Chat_Embedded',
-           {
-               baseLiveAgentContentURL: liveAgentURL + '/content',
-               deploymentId: '5725A000000gVsP',
-               buttonId: '5735A000000kiEa',
-               baseLiveAgentURL: liveAgentURL + '/chat',
-               eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I5A0000008R7CUAU_1729aa92330',
-               isOfflineSupportEnabled: true
-           }
-       );
-   };
- 
-   if (!window.embedded_svc) {
-       var s = document.createElement('script');
-       s.setAttribute('src', orgURL + '/embeddedservice/5.0/esw.min.js');
-       s.onload = function() {
-           initESW(null);
-       };
-       document.body.appendChild(s);
-   } else {
-       initESW('https://service.force.com');
-   }
- 
-var avatarImg;
-var agentName;
-var startButton;
-var startButtonEventSet;
-var avatarImgSet = false;
- 
- 
-var intervalId = window.setInterval(function(){
-   if (!agentName){
-       var agentNames = document.getElementsByClassName("agentName");
-       if (agentNames && agentNames.length > 0){
-           agentName = agentNames[0].innerHTML;
-       }
-   }
-   if (avatarImg != '') setAvatar();
-}, 1000);
- 
-document.addEventListener(
-   "setCustomField",
-   function(event) {
-       var contactFirstName = document.getElementsByClassName('FirstName slds-style-inputtext input');
-       var contactLastName = document.getElementsByClassName('LastName slds-style-inputtext input');
-       var email = document.getElementsByClassName('Email slds-style-inputtext input');
-       embedded_svc.settings.extraPrechatFormDetails[0].value = window.location.href;
-       embedded_svc.settings.extraPrechatFormDetails[1].value = ((contactFirstName && contactFirstName.length > 0) ? contactFirstName[0].value : '') + ' '
-                                                               + ((contactLastName && contactLastName.length > 0) ? contactLastName[0].value : '');
-       embedded_svc.settings.extraPrechatFormDetails[2].value = email ? email[0].value : '';
-       event.detail.callback();
-   },
-   false
-);
- 
- 
- 
-function setAvatar(){
-   if (agentName){
-       if (!avatarImgSet){
-           getUserImage();
-       }
-       if (avatarImg){
-           var urlImageCSS = "url('" + avatarImg + "')";
-           var avatars = document.getElementsByClassName("avatar iconAvatar agentInitial agentIconColor0");
-           for (let i = 0; i < avatars.length; i++){
-               avatars[i].innerHTML = '';
-               avatars[i].style.backgroundImage = urlImageCSS;
-           }
-       }
-   }
-}
- 
-function getUserImage(){
-   avatarImgSet = true;
-   let request = new XMLHttpRequest();
-   let requestURL = chatURL.replace('chat', 'ChatData') + '/services/apexrest/?agentName=' + agentName.replaceAll(' ', '_');
-   request.open('GET', requestURL);
-   request.send();
-   request.onload = () => {
-       if (request.status == 200){
-           avatarImg = orgURL + request.response.replaceAll('"', '').replace('ChatData/', '');
-       } else {
-           console.log(request.status + ' ' + request.statusText);
-           avatarImg = '';
-       }
-   }
-}
-</script>
-
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    
+    <script type='text/javascript'>
+        var orgURL = 'https://youthentrepreneurs.my.salesforce.com';
+        var chatURL = 'https://youthentrepreneurs.secure.force.com/chat';
+        var liveAgentURL = 'https://d.la4-c2-ia5.salesforceliveagent.com';
+        var orgId = '00D5A000001733p';
+    
+    var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+        embedded_svc.settings.extraPrechatFormDetails = [{"label":"Text", "transcriptFields": ["Customer_URL__c"]}, {"label":"Text", "transcriptFields": ["Pre_Chat_Name__c"]}];
+        embedded_svc.settings.extraPrechatInfo = [{
+        "entityFieldMaps": [{
+            "doCreate": true,
+            "doFind": false,
+            "fieldName": "LastName",
+            "isExactMatch": false,
+            "label": "Last Name"
+        }, {
+            "doCreate": true,
+            "doFind": false,
+            "fieldName": "FirstName",
+            "isExactMatch": false,
+            "label": "First Name"
+        }, {
+            "doCreate": true,
+            "doFind": true,
+            "fieldName": "Email",
+            "isExactMatch": true,
+            "label": "Email"
+        }],
+        "entityName": "Contact",
+        "saveToTranscript": "Contact",
+        "showOnCreate": true
+        }];
+    
+        embedded_svc.init(
+            orgURL,
+            chatURL,
+            gslbBaseURL,
+            orgId,
+            'Chat_Embedded',
+            {
+                baseLiveAgentContentURL: liveAgentURL + '/content',
+                deploymentId: '5725A000000gVsP',
+                buttonId: '5735A000000kiEa',
+                baseLiveAgentURL: liveAgentURL + '/chat',
+                eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I5A0000008R7CUAU_1729aa92330',
+                isOfflineSupportEnabled: true
+            }
+        );
+    };
+    
+    if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', orgURL + '/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+            initESW(null);
+        };
+        document.body.appendChild(s);
+    } else {
+        initESW('https://service.force.com');
+    }
+    
+    var avatarImg;
+    var agentName;
+    var startButton;
+    var startButtonEventSet;
+    var avatarImgSet = false;
+    
+    
+    var intervalId = window.setInterval(function(){
+    if (!agentName){
+        var agentNames = document.getElementsByClassName("agentName");
+        if (agentNames && agentNames.length > 0){
+            agentName = agentNames[0].innerHTML;
+        }
+    }
+    if (avatarImg != '') setAvatar();
+    }, 1000);
+    
+    document.addEventListener(
+    "setCustomField",
+    function(event) {
+        var contactFirstName = document.getElementsByClassName('FirstName slds-style-inputtext input');
+        var contactLastName = document.getElementsByClassName('LastName slds-style-inputtext input');
+        var email = document.getElementsByClassName('Email slds-style-inputtext input');
+        embedded_svc.settings.extraPrechatFormDetails[0].value = window.location.href;
+        embedded_svc.settings.extraPrechatFormDetails[1].value = ((contactFirstName && contactFirstName.length > 0) ? contactFirstName[0].value : '') + ' '
+                                                                + ((contactLastName && contactLastName.length > 0) ? contactLastName[0].value : '');
+        event.detail.callback();
+    },
+    false
+    );
+    
+    
+    
+    function setAvatar(){
+    if (agentName){
+        if (!avatarImgSet){
+            getUserImage();
+        }
+        if (avatarImg){
+            var urlImageCSS = "url('" + avatarImg + "')";
+            var avatars = document.getElementsByClassName("avatar iconAvatar agentInitial agentIconColor0");
+            for (let i = 0; i < avatars.length; i++){
+                avatars[i].innerHTML = '';
+                avatars[i].style.backgroundImage = urlImageCSS;
+            }
+        }
+    }
+    }
+    
+    function getUserImage(){
+    avatarImgSet = true;
+    let request = new XMLHttpRequest();
+    let chatDomain = chatURL.replace('chat', 'ChatData');
+    let requestURL = chatDomain + '/services/apexrest/chat?agentName=' + agentName.replaceAll(' ', '_');
+    request.open('GET', requestURL);
+    request.send();
+    request.onload = () => {
+        if (request.status == 200){
+            avatarImg = chatDomain + request.response.replaceAll('"', '').replace('ChatData/', '');
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+            avatarImg = '';
+        }
+    }
+    }
+    </script>
