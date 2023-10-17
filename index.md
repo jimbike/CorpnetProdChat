@@ -1,4 +1,3 @@
-
 <html>
 <body>
 <script type='text/javascript'>
@@ -20,8 +19,5 @@
 	};
 </script>
 <script type='text/javascript' src='https://corpnet.my.site.com/ESWReceptionWebChatTes1697518257907/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-
-
-
 </body>
 </html>
