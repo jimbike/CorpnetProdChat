@@ -1,7 +1,6 @@
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
 <html>
-	<body>
+<body>
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
@@ -21,6 +20,7 @@
 	};
 </script>
 <script type='text/javascript' src='https://corpnet.my.site.com/ESWWebChatReception1697513887603/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 
 </body>
 </html>
