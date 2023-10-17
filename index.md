@@ -4,12 +4,12 @@
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
-			embeddedservice_bootstrap.settings.language = 'en_US';
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
 				'00D3h0000067BmT',
-				'Web_Chat_Reception',
-				'https://corpnet.my.site.com/ESWWebChatReception1697513887603',
+				'Reception_Web_Chat_Test',
+				'https://corpnet.my.site.com/ESWReceptionWebChatTes1697518257907',
 				{
 					scrt2URL: 'https://corpnet.my.salesforce-scrt.com'
 				}
@@ -19,7 +19,8 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://corpnet.my.site.com/ESWWebChatReception1697513887603/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://corpnet.my.site.com/ESWReceptionWebChatTes1697518257907/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 
 
 </body>
